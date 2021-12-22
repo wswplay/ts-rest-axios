@@ -1,3 +1,4 @@
+import { createError } from './helpers/error'
 import { parseHeaders } from './helpers/headers'
 import { AxiosPromise, AxiosRequestConfig, AxiosResponse } from './types'
 
@@ -28,10 +29,10 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
 
     // 异常处理
     request.onerror = function () {
-      reject(new Error('Network Error'))
+      reject(createError('Network Error', config, null, request))
     }
     request.ontimeout = function () {
-      reject(new Error(`Timeout of ${timeout} exceeded`))
+      reject(createError(`Timeout of ${timeout} exceeded`, config, 'Aborted', request))
     }
 
     // 处理headers
@@ -49,7 +50,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       if (resData.status >= 200 && resData.status < 300) {
         resolve(resData)
       } else {
-        reject(new Error(`Request failed with status code ${resData.status}`))
+        reject(createError(`Request failed with status code ${resData.status}`, config, null, request, resData))
       }
     }
   })
