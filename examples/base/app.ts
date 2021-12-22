@@ -70,10 +70,41 @@ axios({
     b: 2
   }
 })
-
 const arr = new Int32Array([21, 31])
 axios({
   method: 'post',
   url: '/base/buffer',
   data: arr
+})
+
+// 处理headers的示例
+axios({
+  method: 'post',
+  url: '/base/post',
+  headers: {
+    'content-type': 'application/json;charset=utf-8'
+  },
+  data: {
+    a: 3,
+    b: 6
+  }
+})
+axios({
+  method: 'post',
+  url: '/base/post',
+  headers: {
+    'Content-Type': 'application/json;charset=utf-8',
+    'Accept': 'application/json, text/plain, */*',
+  },
+  data: {
+    a: 9,
+    b: 12
+  }
+})
+const paramsString = 'q=URLUtils.searchParams&topic=api'
+const searchParams = new URLSearchParams(paramsString)
+axios({
+  method: 'post',
+  url: '/base/post',
+  data: searchParams
 })
