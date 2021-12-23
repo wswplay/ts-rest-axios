@@ -30,3 +30,11 @@ axios.post('/extend/post', { msg: 'post' })
 axios.put('/extend/put', { msg: 'put' })
 
 axios.patch('/extend/patch', { msg: 'patch' })
+
+// 重载示例
+axios('/extend/post', {
+  method: 'post',
+  data: {
+    msg: 'reload request 666'
+  }
+})
