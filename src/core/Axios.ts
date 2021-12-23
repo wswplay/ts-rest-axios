@@ -21,6 +21,12 @@ export default class Axios {
   post(url: string, data?: any, config?: AxiosRequestConfig) {
     this._requestWithData('post', url, data, config)
   }
+  put(url: string, data?: any, config?: AxiosRequestConfig) {
+    this._requestWithData('put', url, data, config)
+  }
+  patch(url: string, data?: any, config?: AxiosRequestConfig) {
+    this._requestWithData('patch', url, data, config)
+  }
 
   // 无data公用方法
   _requestWithoutData(method: Method, url: string, config?: AxiosRequestConfig): AxiosPromise {
