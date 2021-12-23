@@ -9,7 +9,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     if (responseType) request.responseType = responseType
     if (timeout) request.timeout = timeout
 
-    request.open(method.toUpperCase(), url, true)
+    request.open(method.toUpperCase(), url!, true)
 
     request.onreadystatechange = function () {
       if (request.readyState !== 4) return
