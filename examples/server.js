@@ -20,7 +20,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 // 引入api路由文件
-const router = require('./apiRouter')
+const router = require('./api/apiRouter')
 app.use(router)
 
 const port = process.env.PORT || 8090
