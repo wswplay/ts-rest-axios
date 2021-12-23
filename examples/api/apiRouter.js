@@ -1,17 +1,11 @@
-const express = require('express')
-const router = express.Router()
-const simpleApi = require('./modules/simple')
-const baseApi = require('./modules/base')
-const errorApi = require('./modules/error')
-const extendApi = require('./modules/extend')
+const fs = require('fs')
+const path = require('path')
+const router = require('express').Router()
 
-// 入门示例
-simpleApi(router)
-// 基本示例
-baseApi(router)
-// error示例
-errorApi(router)
-// extend示例
-extendApi(router)
+// 读取modules文件，生成api
+const dirPath = path.join(__dirname, 'modules')
+fs.readdirSync(dirPath).forEach(file => {
+  require(`${dirPath}/${file}`)(router)
+})
 
 module.exports = router
