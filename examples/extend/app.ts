@@ -38,3 +38,30 @@ axios('/extend/post', {
     msg: 'reload request 666'
   }
 })
+
+// 接口响应数据-添加泛型参数
+interface ResponseData<T = any> {
+  code: number
+  result: T
+  message: string
+}
+interface User {
+  name: string
+  age: number
+  address: string
+  id: number
+}
+
+function getUser<T>() {
+  return axios<ResponseData<T>>('/extend/user')
+    .then(res => res.data)
+    .catch(err => console.error(err))
+}
+async function generic() {
+  const user = await getUser<User>()
+  if (user) {
+    console.log(user.result.id)
+  }
+}
+
+generic()
