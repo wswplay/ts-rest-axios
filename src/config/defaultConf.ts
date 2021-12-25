@@ -17,7 +17,7 @@ methodsNoData.forEach(method => {
 const methodsWithData = ['post', 'put', 'patch']
 methodsWithData.forEach(method => {
   defaultConf.headers[method] = {
-    'Content-Type': 'application/x-www-form-urlencode'
+    'Content-Type': 'application/x-www-form-urlencoded'
   }
 })
 

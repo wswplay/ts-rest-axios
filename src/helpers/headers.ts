@@ -1,4 +1,5 @@
-import { isPlainObject } from "./util";
+import { Method } from "../types";
+import { deepMergeObj, isPlainObject } from "./util";
 
 export function processHeaders(headers: any, data: any): any {
   const contentTypeName = 'Content-Type'
@@ -23,7 +24,7 @@ export function parseHeaders(headers: string): any {
   })
   return parsed
 }
-
+// 格式化headers字段
 function normalizeHeadersName(headers: any, name: string): void {
   if (!headers) return
   Object.keys(headers).forEach(key => {
@@ -32,4 +33,12 @@ function normalizeHeadersName(headers: any, name: string): void {
       delete headers[key]
     }
   })
+}
+// 扁平化headers对象
+export function flattenHeaders(headers: any, method: Method): any {
+  if (!headers) return headers
+  headers = deepMergeObj(headers.common, headers[method], headers)
+  const keysNeedDelete = ['get', 'delete', 'head', 'options', 'post', 'put', 'patch', 'common']
+  keysNeedDelete.forEach(method => delete headers[method])
+  return headers
 }
