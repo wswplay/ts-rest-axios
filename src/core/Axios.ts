@@ -11,13 +11,19 @@ interface PromiseChain<T> {
   rejected?: RejectedFn
 }
 export default class Axios {
+  // 属性
+  defaultConf: AxiosRequestConfig
   interceptors: Interceptor
-  constructor() {
+
+  // 构造函数
+  constructor(initConfig: AxiosRequestConfig) {
+    this.defaultConf = initConfig
     this.interceptors = {
       request: new InterceptorManager<AxiosRequestConfig>(),
       response: new InterceptorManager<AxiosResponse>()
     }
   }
+  
   // 基本请求方法
   request(url: any, config?: any): AxiosPromise {
     if (typeof url === 'string') {
