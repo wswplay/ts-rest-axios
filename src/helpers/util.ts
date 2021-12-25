@@ -18,3 +18,24 @@ export function extendObjFn<T, U>(to: T, from: U): T & U {
   }
   return to as T & U
 }
+// 深度合并对象
+export function deepMergeObj(...args: any[]): any {
+  const result = Object.create(null)
+  args.forEach(obj => {
+    if (obj) {
+      Object.keys(obj).forEach(key => {
+        const val = obj[key]
+        if (isPlainObject(val)) {
+          if (isPlainObject(result[key])) {
+            result[key] = deepMergeObj(result[key], val)
+          } else {
+            result[key] = deepMergeObj(val)
+          }
+        } else {
+          result[key] = val
+        }
+      })
+    }
+  })
+  return result
+}

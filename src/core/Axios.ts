@@ -1,3 +1,4 @@
+import mergeConfig from "../config/mergeConf";
 import { AxiosPromise, AxiosRequestConfig, AxiosResponse, Method, RejectedFn, ResolvedFn } from "../types";
 import dispatchRequest from "./dispatchRequest";
 import InterceptorManager from "./interceptorManager";
@@ -32,6 +33,9 @@ export default class Axios {
     } else {
       config = url
     }
+    // 合并配置
+    config = mergeConfig(this.defaultConf, config)
+    // Promise链
     const chain: PromiseChain<any>[] = [{
       resolved: dispatchRequest,
       rejected: undefined,
