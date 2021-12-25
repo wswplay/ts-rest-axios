@@ -5,6 +5,9 @@ const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const WebpackConfig = require('./webpack.config')
 
+const path = require('path')
+const viewsPath = path.join(__dirname, 'views')
+
 const app = express()
 const compiler = webpack(WebpackConfig)
 app.use(webpackDevMiddleware(compiler, {
@@ -15,7 +18,7 @@ app.use(webpackDevMiddleware(compiler, {
   }
 }))
 app.use(webpackHotMiddleware(compiler))
-app.use(express.static(__dirname))
+app.use(express.static(viewsPath))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
