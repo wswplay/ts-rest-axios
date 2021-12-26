@@ -36,3 +36,26 @@ axios({
 }).then((res) => {
   console.log(res.data)
 })
+
+const instance = axios.create({
+  transformRequest: [(function(data) {
+    return qs.stringify(data)
+  }), ...(axios.defaultConf.transformRequest as AxiosTransformer[])],
+  transformResponse: [...(axios.defaultConf.transformResponse as AxiosTransformer[]), function(data) {
+    if (typeof data === 'object') {
+      data.b = '这是，用静态方法创建的实例'
+    }
+    return data
+  }]
+})
+
+instance({
+  url: '/config/post',
+  method: 'post',
+  data: {
+    a: 67890,
+    from: 'created instance'
+  }
+}).then((res) => {
+  console.log(res.data)
+})

@@ -7,7 +7,7 @@ const keysDeepMerge = ['headers']
 keysFromVal2.forEach(key => stratMap[key] = fromVal2Strat)
 keysDeepMerge.forEach(key => stratMap[key] = deepMergeStrat)
 
-export default function mergeConfig(defaultConf: AxiosRequestConfig, custConf?: AxiosRequestConfig): AxiosRequestConfig {
+export function mergeConfig(defaultConf: AxiosRequestConfig, custConf?: AxiosRequestConfig): AxiosRequestConfig {
   if (!custConf) custConf = {}
   const config = Object.create(null)
 
