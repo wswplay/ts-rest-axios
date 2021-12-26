@@ -1,3 +1,5 @@
+import Cancel, { isCancel } from "../cancel/Cancel";
+import CancelToken from "../cancel/CancelToken";
 import defaultConf from "../config/defaultConf";
 import { mergeConfig } from "../config/mergeConf";
 import { extendObjFn } from "../helpers/util";
@@ -16,5 +18,9 @@ const axiosInst = createInstance(defaultConf)
 axiosInst.create = function (config) {
   return createInstance(mergeConfig(defaultConf, config))
 }
+
+axiosInst.CancelToken = CancelToken
+axiosInst.Cancel = Cancel
+axiosInst.isCancel = isCancel
 
 export default axiosInst
