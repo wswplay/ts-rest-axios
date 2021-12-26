@@ -64,13 +64,13 @@ export default class Axios {
     return this._requestWithoutData('options', url, config)
   }
   post(url: string, data?: any, config?: AxiosRequestConfig) {
-    this._requestWithData('post', url, data, config)
+    return this._requestWithData('post', url, data, config)
   }
   put(url: string, data?: any, config?: AxiosRequestConfig) {
-    this._requestWithData('put', url, data, config)
+    return this._requestWithData('put', url, data, config)
   }
   patch(url: string, data?: any, config?: AxiosRequestConfig) {
-    this._requestWithData('patch', url, data, config)
+    return this._requestWithData('patch', url, data, config)
   }
 
   // 无data公用方法
