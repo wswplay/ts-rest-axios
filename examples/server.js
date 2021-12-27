@@ -4,6 +4,8 @@ const cookieParser = require('cookie-parser')
 const webpack = require('webpack')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
+const multipart = require('connect-multiparty')
+
 const WebpackConfig = require('./webpack.config')
 
 const path = require('path')
@@ -29,6 +31,9 @@ app.use(express.static(viewsPath, {
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
+app.use(multipart({
+  uploadDir: path.resolve(__dirname, 'upload-file')
+}))
 
 // 引入api路由文件
 const router = require('./api/apiRouter')
