@@ -1,6 +1,7 @@
 import axios from '../../../src/index'
 import 'nprogress/nprogress.css'
 import NProgress from 'nprogress'
+import { downFile } from '../util'
 
 const instance = axios.create()
 
@@ -13,8 +14,8 @@ document.getElementById('downPic').setAttribute('src', picUrl)
 
 const downloadEl = document.getElementById('download')
 downloadEl!.addEventListener('click', e => {
-  instance.get(picUrl).then(res => {
-    console.log('res===', res)
+  instance.get(picUrl, { responseType: 'blob' }).then(res => {
+    downFile(res.data)
   })
 })
 
