@@ -1,11 +1,18 @@
 export type Method =
-  'get' | 'GET' |
-  'post' | "POST" |
-  'put' | 'PUT' |
-  'delete' | 'DELETE' |
-  'head' | 'HEAD' |
-  'patch' | 'PATCH' |
-  'options' | 'OPTIONS'
+  | 'get'
+  | 'GET'
+  | 'post'
+  | 'POST'
+  | 'put'
+  | 'PUT'
+  | 'delete'
+  | 'DELETE'
+  | 'head'
+  | 'HEAD'
+  | 'patch'
+  | 'PATCH'
+  | 'options'
+  | 'OPTIONS'
 
 export interface AxiosRequestConfig {
   url?: string
@@ -21,6 +28,8 @@ export interface AxiosRequestConfig {
   withCredentials?: boolean
   xsrfCookieName?: string
   xsrfHeaderName?: string
+  onDownloadProgress?: (e: ProgressEvent) => void
+  onUploadProgress?: (e: ProgressEvent) => void
 
   [commonKey: string]: any
 }
@@ -105,12 +114,12 @@ export interface CancelTokenSource {
   cancel: Canceler
 }
 export interface CancelTokenStatic {
-  new(executor: CancelExecutor): CancelToken
+  new (executor: CancelExecutor): CancelToken
   source(): CancelTokenSource
 }
 export interface Cancel {
   message?: string
 }
 export interface CancelStatic {
-  new(message?: string): Cancel
+  new (message?: string): Cancel
 }
