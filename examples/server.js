@@ -21,7 +21,11 @@ app.use(webpackDevMiddleware(compiler, {
   }
 }))
 app.use(webpackHotMiddleware(compiler))
-app.use(express.static(viewsPath))
+app.use(express.static(viewsPath, {
+  setHeaders (res) {
+    res.cookie('XSRF-TOKEN-D', 'nanzhi-xiao')
+  }
+}))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())

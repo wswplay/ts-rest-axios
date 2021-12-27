@@ -1,5 +1,10 @@
 import { isDate, isPlainObject } from './util'
 
+interface URLOrigin {
+  protocol: string
+  host: string
+}
+
 export function buildUrl(url: string, params?: any): string {
   if (!params) return url
   const parts: string[] = []
@@ -33,6 +38,11 @@ export function buildUrl(url: string, params?: any): string {
   return url
 }
 
+export function isURLSameOrigin(requestUrl: string): boolean {
+  const parsedOrigin = resolveUrl(requestUrl)
+  return (parsedOrigin.protocol === currentOrigin.protocol && parsedOrigin.host === currentOrigin.host)
+}
+
 // 编码解码
 function encode(val: string): string {
   return encodeURIComponent(val)
@@ -43,4 +53,15 @@ function encode(val: string): string {
     .replace(/%20/g, '+')
     .replace(/%5B/ig, '[')
     .replace(/%5D/ig, ']')
+}
+// 解析url相关信息
+const urlParseingNode = document.createElement('a')
+const currentOrigin = resolveUrl(window.location.href)
+function resolveUrl(url: string): URLOrigin {
+  urlParseingNode.setAttribute('href', url)
+  const { protocol, host } = urlParseingNode
+  return {
+    protocol,
+    host,
+  }
 }

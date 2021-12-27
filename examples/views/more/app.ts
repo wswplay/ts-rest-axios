@@ -11,3 +11,12 @@ axios.post('http://127.0.0.1:8088/more/server2', { msg: '跨域请求' }, {
 }).then(res => {
   console.log('跨域：', res.data)
 })
+
+const instance = axios.create({
+  xsrfCookieName: 'XSRF-TOKEN-D',
+  xsrfHeaderName: 'X-XSRF-TOKEN-D'
+})
+
+instance.get('/more/get').then(res => {
+  console.log('XSRF', res)
+})
