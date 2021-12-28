@@ -15,4 +15,8 @@ module.exports = router => {
       res.end('UnAuthorization')
     }
   })
+  router.get('/more/304', function(req, res) {
+    res.status(304)
+    res.end()
+  })
 }

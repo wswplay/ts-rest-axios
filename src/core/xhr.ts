@@ -20,7 +20,8 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       xsrfHeaderName,
       onDownloadProgress,
       onUploadProgress,
-      auth
+      auth,
+      validateStatus,
     } = config
 
     const request = new XMLHttpRequest()
@@ -105,7 +106,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     }
     // 处理错误码
     function handleResponse(resData: AxiosResponse): void {
-      if (resData.status >= 200 && resData.status < 300) {
+      if (!validateStatus || validateStatus(resData.status)) {
         resolve(resData)
       } else {
         reject(
