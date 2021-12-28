@@ -20,3 +20,15 @@ const instance = axios.create({
 instance.get('/more/get').then(res => {
   console.log('XSRF', res)
 })
+
+// 授权
+axios.post('/more/post', {
+  a: '授权'
+}, {
+  auth: {
+    username: 'Xiao',
+    password: 'nanzhi'
+  }
+}).then(res => {
+  console.log(res)
+})

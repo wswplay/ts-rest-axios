@@ -3,7 +3,7 @@ import { AxiosRequestConfig } from "../types";
 
 const stratMap = Object.create(null)
 const keysFromVal2 = ['url', 'params', 'data']
-const keysDeepMerge = ['headers']
+const keysDeepMerge = ['headers', 'auth']
 keysFromVal2.forEach(key => stratMap[key] = fromVal2Strat)
 keysDeepMerge.forEach(key => stratMap[key] = deepMergeStrat)
 

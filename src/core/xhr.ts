@@ -19,7 +19,8 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       xsrfCookieName,
       xsrfHeaderName,
       onDownloadProgress,
-      onUploadProgress
+      onUploadProgress,
+      auth
     } = config
 
     const request = new XMLHttpRequest()
@@ -38,7 +39,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     }
     // 事件监听
     function addEvents(): void {
-      request.onreadystatechange = function() {
+      request.onreadystatechange = function () {
         if (request.readyState !== 4) return
         if (request.status === 0) return
         const responseHeaders = parseHeaders(request.getAllResponseHeaders())
@@ -54,10 +55,10 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
         handleResponse(response)
       }
       // 异常处理
-      request.onerror = function() {
+      request.onerror = function () {
         reject(createError('Network Error', config, null, request))
       }
-      request.ontimeout = function() {
+      request.ontimeout = function () {
         reject(createError(`Timeout of ${timeout} exceeded`, config, 'Aborted', request))
       }
       // 上传下载进度
@@ -79,6 +80,10 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
         if (xsrfValue && xsrfHeaderName) {
           headers[xsrfHeaderName] = xsrfValue
         }
+      }
+      // 授权
+      if (auth) {
+        headers['Authorization'] = `Basic ${btoa(auth.username + ':' + auth.password)}`
       }
       // 处理headers
       Object.keys(headers).forEach(name => {
