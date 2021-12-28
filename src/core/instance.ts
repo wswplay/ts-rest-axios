@@ -23,4 +23,12 @@ axiosInst.CancelToken = CancelToken
 axiosInst.Cancel = Cancel
 axiosInst.isCancel = isCancel
 
+axiosInst.all = function (promises) {
+  return Promise.all(promises)
+}
+axiosInst.spread = function (callback) {
+  return (arr) => callback.apply(null, arr)
+}
+axiosInst.Axios = Axios
+
 export default axiosInst

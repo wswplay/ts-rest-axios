@@ -1,6 +1,6 @@
 import { mergeConfig } from "../config/mergeConf";
 import { AxiosPromise, AxiosRequestConfig, AxiosResponse, Method, RejectedFn, ResolvedFn } from "../types";
-import dispatchRequest from "./dispatchRequest";
+import dispatchRequest, { transformUrl } from "./dispatchRequest";
 import InterceptorManager from "./interceptorManager";
 
 interface Interceptor {
@@ -24,7 +24,7 @@ export default class Axios {
       response: new InterceptorManager<AxiosResponse>()
     }
   }
-  
+
   // 基本请求方法
   request(url: any, config?: any): AxiosPromise {
     if (typeof url === 'string') {
@@ -71,6 +71,10 @@ export default class Axios {
   }
   patch(url: string, data?: any, config?: AxiosRequestConfig) {
     return this._requestWithData('patch', url, data, config)
+  }
+  getUri(config?: AxiosRequestConfig): string {
+    config = mergeConfig(this.defaultConf, config)
+    return transformUrl(config)
   }
 
   // 无data公用方法
