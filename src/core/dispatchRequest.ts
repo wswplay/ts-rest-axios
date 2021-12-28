@@ -18,8 +18,8 @@ function processConfig(config: AxiosRequestConfig): void {
   config.headers = flattenHeaders(config.headers, config.method!)
 }
 function transformUrl(config: AxiosRequestConfig): string {
-  const { url, params } = config
-  return buildUrl(url!, params)
+  const { url, params, paramsSerializer } = config
+  return buildUrl(url!, params, paramsSerializer)
 }
 function transformResponseData(res: AxiosResponse): AxiosResponse {
   res.data = transFormer(res.data, res.headers, res.config.transformResponse)
