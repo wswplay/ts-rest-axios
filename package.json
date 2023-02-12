@@ -1,6 +1,6 @@
 {
-  "name": "ts-rest-axios",
-  "version": "1.0.1",
+  "name": "@wswplay/ts-rest-axios",
+  "version": "1.0.0",
   "description": "",
   "keywords": [],
   "main": "dist/ts-rest-axios.umd.js",
