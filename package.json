@@ -1,6 +1,6 @@
 {
   "name": "@wswplay/ts-rest-axios",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "keywords": [],
   "main": "dist/ts-rest-axios.umd.js",
@@ -12,7 +12,7 @@
   "author": "xiao <183627391@qq.com>",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/wswplay/ts-rest-axios"
   },
   "license": "MIT",
   "engines": {
